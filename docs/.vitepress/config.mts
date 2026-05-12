@@ -11,7 +11,7 @@ export default defineConfig({
     
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'App', link: 'https://app.dev-const.com' },
+      // { text: 'App', link: 'https://app.dev-const.com' },
       // { text: 'Docs', link: '/docs' }
     ],
 
