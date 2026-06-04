@@ -1,4 +1,21 @@
+# Next.js
+.next/
+out/
+
+# Dependencies
 node_modules/
 
-docs/.vitepress/cache/
+# Env
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+
+# Debug
+npm-debug.log*
+
+# VitePress
 docs/.vitepress/dist/
+docs/.vitepress/cache/
