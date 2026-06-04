@@ -10,9 +10,9 @@ export default defineConfig({
     logo: '/logo.svg',
     
     nav: [
-      { text: 'Home', link: '/' },
-      // { text: 'App', link: 'https://app.dev-const.com' },
-      // { text: 'Docs', link: '/docs' }
+      { text: 'Litepaper', link: '/litepaper.pdf' },
+      { text: 'Quick Start', link: 'https://constfi.gitbook.io/docs' },
+      { text: 'Launch App', link: '#' },
     ],
 
     sidebar: [

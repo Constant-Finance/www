@@ -6,13 +6,6 @@ hero:
   name: "Constant Finance"
   text: "Reshaping the infrastructure of <span style='color: #5672cd;'>DeFi lending</span>"
   # tagline: Enabling users to securely lend and borrow with fixed interest rate.
-  actions:
-    - theme: brand
-      text: Litepaper
-      link: /litepaper.pdf
-    - theme: alt
-      text: Quick start
-      link: https://constfi.gitbook.io/docs
 
 features:
   - title: LP NFT Collateral Support

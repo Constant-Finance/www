@@ -10,3 +10,17 @@
     --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #ffb74d, #d6711b);
     /* --vp-home-hero-name-color: orange; */
 }
+
+/* Disabled nav item for Launch App (not yet open) */
+.VPNavBarMenuLink[href="#"] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Mobile nav */
+.VPNavScreenMenuLink[href="#"] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
