@@ -10,6 +10,7 @@ export default defineConfig({
     logo: '/logo.svg',
     
     nav: [
+      { text: 'Points', link: 'https://points.constant.finance/' },
       { text: 'Litepaper', link: '/litepaper.pdf' },
       { text: 'Quick Start', link: 'https://constfi.gitbook.io/docs' },
       { text: 'Launch App', link: '#' },
