@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -42,140 +42,83 @@ const socialLinks = [
   },
 ]
 
-function ThemeSwitch({ isDark, onToggle }: { isDark: boolean; onToggle: () => void }) {
-  return (
-    <button
-      role="switch"
-      aria-checked={isDark}
-      aria-label="Toggle color scheme"
-      onClick={onToggle}
-      style={{
-        position: 'relative',
-        width: 40,
-        height: 22,
-        borderRadius: 11,
-        flexShrink: 0,
-        border: '1px solid',
-        cursor: 'pointer',
-        transition: 'border-color 0.25s, background-color 0.25s',
-        borderColor: isDark ? '#3c3c43' : '#dadadc',
-        backgroundColor: isDark ? 'rgba(101,117,133,.38)' : 'rgba(235,235,235,.8)',
-      }}
-    >
-      {/* Sliding thumb */}
-      <span
-        style={{
-          position: 'absolute',
-          top: 1,
-          left: 1,
-          width: 18,
-          height: 18,
-          borderRadius: '50%',
-          backgroundColor: isDark ? '#1e1e20' : '#fff',
-          boxShadow: '0 1px 3px rgba(0,0,0,.15)',
-          transition: 'transform 0.25s, background-color 0.25s',
-          transform: isDark ? 'translateX(18px)' : 'translateX(0)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          overflow: 'hidden',
-        }}
-      >
-        {/* Sun — shown in dark mode */}
-        <svg
-          viewBox="0 0 24 24"
-          width={12}
-          height={12}
-          fill="currentColor"
-          style={{
-            position: 'absolute',
-            color: isDark ? 'rgba(235,235,245,.6)' : 'transparent',
-            transition: 'opacity 0.25s',
-            opacity: isDark ? 1 : 0,
-          }}
-        >
-          <circle cx="12" cy="12" r="4" />
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none"/>
-        </svg>
-        {/* Moon — shown in light mode */}
-        <svg
-          viewBox="0 0 24 24"
-          width={12}
-          height={12}
-          fill="currentColor"
-          style={{
-            position: 'absolute',
-            color: isDark ? 'transparent' : '#8e96aa',
-            transition: 'opacity 0.25s',
-            opacity: isDark ? 0 : 1,
-          }}
-        >
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </svg>
-      </span>
-    </button>
-  )
-}
-
 export default function Nav() {
   const [open, setOpen] = useState(false)
-  const [isDark, setIsDark] = useState(false)
-
-  useEffect(() => {
-    setIsDark(document.documentElement.classList.contains('dark'))
-  }, [])
-
-  const toggleDark = () => {
-    const next = !isDark
-    setIsDark(next)
-    document.documentElement.classList.toggle('dark', next)
-    localStorage.setItem('theme', next ? 'dark' : 'light')
-  }
 
   return (
-    <header className="sticky top-0 z-50 bg-white/90 dark:bg-[rgba(27,27,31,0.9)] backdrop-blur border-b border-gray-200 dark:border-[#3c3c43]">
-      <div className="max-w-[1440px] mx-auto px-8 h-16 flex items-center gap-4">
+    <header
+      className="sticky top-0 z-50 border-b"
+      style={{
+        background: 'rgba(0,0,0,0.85)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderColor: 'rgba(255,255,255,0.06)',
+      }}
+    >
+      <div className="max-w-[1440px] mx-auto px-8 h-16 flex items-center gap-6">
 
-        {/* Logo — left */}
-        <Link href="/" className="flex items-center gap-2 flex-shrink-0 mr-4">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2.5 flex-shrink-0 mr-2">
           <Image src="/logo.svg" alt="" width={24} height={26} priority />
-          <span className="text-sm font-semibold text-gray-800 dark:text-[rgba(255,255,245,0.86)]">
+          <span
+            className="text-sm font-semibold text-white/90"
+            style={{ fontFamily: 'var(--font-clash)' }}
+          >
             Constant Finance
           </span>
         </Link>
 
         <div className="flex-1" />
 
-        {/* Nav links — right */}
-        <nav className="hidden md:flex items-center gap-4 text-sm">
-          <a
-            href="/litepaper.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 dark:text-[rgba(235,235,245,0.6)] hover:text-gray-900 dark:hover:text-[rgba(255,255,245,0.86)] transition-colors"
+        {/* Desktop nav links */}
+        <nav className="hidden md:flex items-center gap-1 text-sm">
+          {[
+            { label: 'Litepaper', href: '/litepaper.pdf' },
+            { label: 'Quick Start', href: 'https://constfi.gitbook.io/docs' },
+          ].map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 rounded-lg transition-all"
+              style={{ fontFamily: 'var(--font-clash)', color: 'rgba(255,255,255,0.55)' }}
+              onMouseEnter={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.90)'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)' }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.55)'; e.currentTarget.style.background = '' }}
+            >
+              {item.label}
+            </a>
+          ))}
+
+          {/* Launch App — coming soon */}
+          <span
+            className="px-4 py-2 rounded-lg cursor-not-allowed select-none"
+            style={{ fontFamily: 'var(--font-clash)', color: 'rgba(255,255,255,0.20)' }}
+            title="Coming soon"
           >
-            Litepaper
-          </a>
-          <a
-            href="https://constfi.gitbook.io/docs"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 dark:text-[rgba(235,235,245,0.6)] hover:text-gray-900 dark:hover:text-[rgba(255,255,245,0.86)] transition-colors"
-          >
-            Quick Start
-          </a>
-          <span className="text-gray-400 dark:text-[rgba(235,235,245,0.25)] cursor-not-allowed select-none">
             Launch App
           </span>
+
+          {/* Points — amber CTA */}
+          <a
+            href="https://points.constant.finance/rewards"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-brand ml-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold text-black"
+            style={{
+              fontFamily: 'var(--font-clash)',
+              background: 'linear-gradient(135deg, #ffb74d, #f78c1f)',
+            }}
+          >
+            Points
+            <svg viewBox="0 0 16 16" fill="currentColor" className="w-3.5 h-3.5">
+              <path fillRule="evenodd" d="M8.22 2.97a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06l2.97-2.97H3.75a.75.75 0 0 1 0-1.5h7.44L8.22 4.03a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+            </svg>
+          </a>
         </nav>
 
         {/* Divider */}
-        <div className="hidden md:block w-px h-6 bg-gray-200 dark:bg-[#3c3c43] mx-1" />
-
-        {/* Dark mode toggle */}
-        <span className="hidden md:flex">
-          <ThemeSwitch isDark={isDark} onToggle={toggleDark} />
-        </span>
+        <div className="hidden md:block w-px h-5 mx-1" style={{ background: 'rgba(255,255,255,0.08)' }} />
 
         {/* Social icons */}
         <div className="hidden md:flex items-center gap-3">
@@ -186,7 +129,7 @@ export default function Nav() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.name}
-              className="text-gray-500 dark:text-[rgba(235,235,245,0.6)] hover:text-gray-900 dark:hover:text-[rgba(255,255,245,0.86)] transition-colors"
+              className="text-white/35 hover:text-white/75 transition-colors"
             >
               {s.icon}
             </a>
@@ -195,7 +138,7 @@ export default function Nav() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2 text-gray-600 dark:text-gray-400"
+          className="md:hidden p-2 text-white/50 hover:text-white/80 transition-colors"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -213,17 +156,35 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden border-t border-gray-200 dark:border-[#3c3c43] px-6 py-4 space-y-4 bg-white dark:bg-[#1b1b1f]">
-          <a href="/litepaper.pdf" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-700 dark:text-gray-300">Litepaper</a>
-          <a href="https://constfi.gitbook.io/docs" target="_blank" rel="noopener noreferrer" className="block text-sm text-gray-700 dark:text-gray-300">Quick Start</a>
-          <span className="block text-sm text-gray-400 cursor-not-allowed">Launch App</span>
-          <div className="flex items-center gap-4 pt-2">
+        <div
+          className="md:hidden border-t px-6 py-5 space-y-1"
+          style={{ borderColor: 'rgba(255,255,255,0.06)', background: '#000' }}
+        >
+          {[
+            { label: 'Litepaper', href: '/litepaper.pdf' },
+            { label: 'Quick Start', href: 'https://constfi.gitbook.io/docs' },
+          ].map((item) => (
+            <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer"
+              className="block px-4 py-2.5 rounded-lg text-sm text-white/60 hover:text-white/90 hover:bg-white/5 transition-all"
+              style={{ fontFamily: 'var(--font-clash)' }}>
+              {item.label}
+            </a>
+          ))}
+          <span className="block px-4 py-2.5 text-sm text-white/20 cursor-not-allowed" style={{ fontFamily: 'var(--font-clash)' }}>
+            Launch App
+          </span>
+          <a href="https://points.constant.finance/rewards" target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg text-sm font-semibold text-black mt-1"
+            style={{ fontFamily: 'var(--font-clash)', background: 'linear-gradient(135deg, #ffb74d, #f78c1f)' }}>
+            Points →
+          </a>
+          <div className="flex items-center gap-4 px-4 pt-3">
             {socialLinks.map((s) => (
-              <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.name} className="text-gray-500 dark:text-gray-400">
+              <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer"
+                aria-label={s.name} className="text-white/40 hover:text-white/70 transition-colors">
                 {s.icon}
               </a>
             ))}
-            <ThemeSwitch isDark={isDark} onToggle={toggleDark} />
           </div>
         </div>
       )}

@@ -1,63 +1,116 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand: #f78c1f;
-  --color-brand-dark: #d6711b;
-  --color-brand-light: #ffb74d;
+  --font-clash: "Clash Display Variable", "Clash Display", sans-serif;
+
+  --color-brand:         #ffb74d;
+  --color-brand-mid:     #f78c1f;
+  --color-brand-dark:    #d6711b;
+
+  --color-bg-card:       #0a0702;
+  --color-bg-card-inner: #1c1408;
+  --color-bg-card-deep:  #291e0a;
+
+  --color-success:       #00bc7d;
 }
 
-/* Enable class-based dark mode */
-@variant dark (&:where(.dark, .dark *));
+/* ─── Base ─────────────────────────────────────── */
+html, body {
+  background: #060401 !important;
+  color: rgba(255, 255, 255, 0.92);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-/* Prose styles for markdown-rendered legal pages */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-clash);
+}
+
+/* ─── Feature Card ──────────────────────────────── */
+.feature-card {
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+}
+.feature-card:hover {
+  border-color: rgba(255, 183, 77, 0.65) !important;
+  box-shadow: 0 0 32px rgba(255, 183, 77, 0.10), 0 2px 8px rgba(0,0,0,0.4);
+  transform: translateY(-2px);
+}
+.feature-card:hover .feature-card-glow {
+  opacity: 1;
+}
+.feature-card-glow {
+  opacity: 0.75;
+  transition: opacity 0.3s;
+}
+.feature-deco {
+  opacity: 0.52;
+  transition: opacity 0.3s;
+}
+.feature-card:hover .feature-deco {
+  opacity: 0.80;
+}
+
+/* ─── CTA Button Glow ───────────────────────────── */
+.btn-brand {
+  transition: box-shadow 0.2s;
+  box-shadow: 0 0 20px rgba(255, 183, 77, 0.25);
+}
+.btn-brand:hover {
+  box-shadow: 0 0 32px rgba(255, 183, 77, 0.45);
+}
+
+/* ─── Prose (legal / about pages) ──────────────── */
 .prose h1 {
+  font-family: var(--font-clash);
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.92);
 }
 .prose h2 {
+  font-family: var(--font-clash);
   font-size: 1.25rem;
   font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 0.75rem;
-  color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.92);
 }
 .prose h3 {
+  font-family: var(--font-clash);
   font-size: 1.1rem;
   font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
-  color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.92);
 }
 .prose p {
   margin-bottom: 1rem;
-  color: #374151;
+  color: rgba(235, 235, 245, 0.60);
   line-height: 1.75;
 }
 .prose ul {
   list-style-type: disc;
   padding-left: 1.5rem;
   margin-bottom: 1rem;
-  color: #374151;
+  color: rgba(235, 235, 245, 0.60);
 }
 .prose ol {
   list-style-type: decimal;
   padding-left: 1.5rem;
   margin-bottom: 1rem;
-  color: #374151;
+  color: rgba(235, 235, 245, 0.60);
 }
 .prose li {
   margin-bottom: 0.4rem;
   line-height: 1.75;
 }
 .prose a {
-  color: #f78c1f;
+  color: #ffb74d;
   text-decoration: underline;
 }
 .prose strong {
   font-weight: 600;
-  color: #1a1a1a;
+  color: rgba(255, 255, 255, 0.92);
 }
 .prose table {
   width: 100%;
@@ -66,35 +119,15 @@
   font-size: 0.875rem;
 }
 .prose th {
-  background: #f3f4f6;
+  background: #1c1408;
   font-weight: 600;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid rgba(255, 183, 77, 0.15);
   text-align: left;
+  color: rgba(255, 255, 255, 0.92);
 }
 .prose td {
   padding: 0.5rem 0.75rem;
-  border: 1px solid #e5e7eb;
-  color: #374151;
-}
-
-/* Dark mode prose overrides */
-.dark .prose h1,
-.dark .prose h2,
-.dark .prose h3,
-.dark .prose strong {
-  color: rgba(255, 255, 245, 0.86);
-}
-.dark .prose p,
-.dark .prose li,
-.dark .prose td {
-  color: rgba(235, 235, 245, 0.6);
-}
-.dark .prose th {
-  background: #2c2c32;
-  border-color: #3c3c43;
-  color: rgba(255, 255, 245, 0.86);
-}
-.dark .prose td {
-  border-color: #3c3c43;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(235, 235, 245, 0.60);
 }

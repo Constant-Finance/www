@@ -2,10 +2,17 @@ export const metadata = { title: 'About Us — Constant Finance' }
 
 export default function About() {
   return (
-    <div className="max-w-3xl mx-auto px-6 py-16">
-      <h1 className="text-4xl font-bold text-gray-900 mb-2">About Us</h1>
-      <p className="text-lg text-gray-500 mb-10">Our Roots: Centralized Expertise, Decentralized Vision</p>
-      <div className="space-y-6 text-gray-600 leading-relaxed">
+    <div className="max-w-3xl mx-auto px-6 py-20">
+      <h1
+        className="text-4xl font-semibold text-white/90 mb-2"
+        style={{ fontFamily: 'var(--font-clash)' }}
+      >
+        About Us
+      </h1>
+      <p className="text-lg text-white/40 mb-12" style={{ fontFamily: 'var(--font-clash)' }}>
+        Our Roots: Centralized Expertise, Decentralized Vision
+      </p>
+      <div className="space-y-6 text-white/55 leading-relaxed text-base">
         <p>
           The Web3 stack has matured beyond experiments. The future belongs to modular,
           production-grade infrastructure that withstands real economic stress, is interoperable
