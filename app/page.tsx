@@ -1,4 +1,8 @@
+'use client'
+
 /* eslint-disable react/no-unknown-property */
+
+import { useState } from 'react'
 
 const features = [
   // 1. Position Isolation
@@ -13,33 +17,38 @@ const features = [
     deco: (
       <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
         {[
-          { x: 20, y: 15, active: false },
-          { x: 80, y: 15, active: false },
-          { x: 140, y: 15, active: true },
-          { x: 20, y: 68, active: false },
-          { x: 80, y: 68, active: false },
-          { x: 140, y: 68, active: false },
-        ].map((cell, i) => (
-          <g key={i}>
-            <rect x={cell.x} y={cell.y} width="50" height="40" rx="6"
-              fill={cell.active ? '#ffb74d' : 'transparent'}
-              fillOpacity={cell.active ? 0.1 : 0}
-              stroke="#ffb74d"
-              strokeOpacity={cell.active ? 0.7 : 0.18}
-              strokeWidth={cell.active ? 1.5 : 1}
-            >
-              {cell.active && <animate attributeName="strokeOpacity" values="0.7;0.3;0.7" dur="2s" repeatCount="indefinite" />}
-            </rect>
-            {cell.active && (
-              <path d="M165,28 L165,42 C165,47 169,51 165,55 C161,51 155,47 155,42 L155,28 L165,28 Z"
-                stroke="#ffb74d" strokeOpacity="0.8" strokeWidth="1.2" fill="none" strokeLinejoin="round" />
-            )}
+          { x: 0, asset: 'BTC', delay: '0s' },
+          { x: 69, asset: 'ETH', delay: '0.6s' },
+          { x: 138, asset: 'USD', delay: '1.2s' },
+        ].map((silo) => (
+          <g key={silo.asset} transform={`translate(${silo.x} 0)`}>
+            {/* Independent margin silo */}
+            <rect x="3" y="3" width="59" height="110" rx="9"
+              stroke="#ffb74d" strokeOpacity="0.18" strokeWidth="1" strokeDasharray="4 4" />
+
+            {/* Asset being deposited */}
+            <circle cx="32" cy="16" r="10" fill="#ffb74d" fillOpacity="0.12"
+              stroke="#ffb74d" strokeOpacity="0.75" strokeWidth="1.2">
+              <animate attributeName="cy" values="14;35;14" dur="3.2s" begin={silo.delay} repeatCount="indefinite" />
+              <animate attributeName="fillOpacity" values="0.12;0.28;0.12" dur="3.2s" begin={silo.delay} repeatCount="indefinite" />
+            </circle>
+            <text x="32" y="20" textAnchor="middle" fill="#ffb74d" fillOpacity="0.9"
+              fontSize="7" fontWeight="600" fontFamily="monospace">
+              {silo.asset}
+              <animate attributeName="y" values="18;39;18" dur="3.2s" begin={silo.delay} repeatCount="indefinite" />
+            </text>
+
+            {/* Piggy bank */}
+            <path d="M8 68 C8 55 17 47 30 47 C41 47 50 53 52 62 H56 C58 62 60 64 60 67 V73 C60 75 58 77 56 77 H52 C49 85 41 90 31 90 H21 C13 90 8 83 8 75 Z"
+              fill="#ffb74d" fillOpacity="0.08" stroke="#ffb74d" strokeOpacity="0.68" strokeWidth="1.3" strokeLinejoin="round" />
+            <path d="M18 51 L20 42 L29 48" fill="#ffb74d" fillOpacity="0.08"
+              stroke="#ffb74d" strokeOpacity="0.68" strokeWidth="1.3" strokeLinejoin="round" />
+            <path d="M25 48 H37" stroke="#ffb74d" strokeOpacity="0.8" strokeWidth="1.5" strokeLinecap="round" />
+            <circle cx="44" cy="61" r="1.5" fill="#ffb74d" fillOpacity="0.85" />
+            <path d="M8 61 C2 59 2 67 7 67" stroke="#ffb74d" strokeOpacity="0.5" strokeWidth="1.2" strokeLinecap="round" />
+            <path d="M20 89 V98 M43 88 V98" stroke="#ffb74d" strokeOpacity="0.68" strokeWidth="2" strokeLinecap="round" />
           </g>
         ))}
-        <rect x="136" y="11" width="58" height="48" rx="8"
-          stroke="#ffb74d" strokeOpacity="0.2" strokeWidth="1" strokeDasharray="4 3">
-          <animate attributeName="strokeOpacity" values="0.2;0.5;0.2" dur="2.5s" repeatCount="indefinite" />
-        </rect>
       </svg>
     ),
   },
@@ -240,7 +249,28 @@ const features = [
   },
 ]
 
+const stats = [
+  { label: 'Positions', value: 'Isolated', featureIndices: [0] },
+  { label: 'Rates', value: 'Fixed', featureIndices: [1] },
+  { label: 'Collateral', value: 'RWA & LP NFT', featureIndices: [2, 3] },
+  { label: 'Leverage', value: 'Up to 20×', featureIndices: [3] },
+]
+
 export default function Home() {
+  const [activeStatIndex, setActiveStatIndex] = useState<number | null>(null)
+  const [hoveredFeatureIndex, setHoveredFeatureIndex] = useState<number | null>(null)
+  const activeStatFeatureIndices = activeStatIndex === null ? [] : stats[activeStatIndex].featureIndices
+  const highlightedFeatureIndices = hoveredFeatureIndex === null
+    ? activeStatFeatureIndices
+    : [hoveredFeatureIndex]
+  const displayedFeatures = features
+    .map((feature, index) => ({ feature, index }))
+    .sort((a, b) => {
+      const aIsActive = activeStatFeatureIndices.includes(a.index)
+      const bIsActive = activeStatFeatureIndices.includes(b.index)
+      return Number(bIsActive) - Number(aIsActive)
+    })
+
   return (
     <>
       {/* ── Hero ─────────────────────────────────────── */}
@@ -280,21 +310,31 @@ export default function Home() {
       <div className="max-w-[1152px] mx-auto px-6">
         <div className="py-10"
           style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8" style={{ paddingLeft: '36px' }}>
-            {[
-              { label: 'Position Risk', value: 'Isolated' },
-              { label: 'Rate Model', value: 'Fixed' },
-              { label: 'Collateral', value: 'RWA / LP' },
-              { label: 'Max Leverage', value: '20×' },
-            ].map((s) => (
-              <div key={s.label} className="flex flex-col gap-1">
+          <div
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+            style={{ paddingLeft: '36px' }}
+            onMouseLeave={() => setActiveStatIndex(null)}
+          >
+            {stats.map((s, statIndex) => (
+              <button
+                type="button"
+                key={s.label}
+                className="flex flex-col items-start gap-1 cursor-default transition-opacity duration-200"
+                style={{
+                  opacity: activeStatIndex === null || activeStatIndex === statIndex ? 1 : 0.38,
+                }}
+                onMouseEnter={() => setActiveStatIndex(statIndex)}
+                onClick={() => setActiveStatIndex(statIndex)}
+                onFocus={() => setActiveStatIndex(statIndex)}
+                onBlur={() => setActiveStatIndex(null)}
+              >
                 <span className="text-3xl font-semibold" style={{
                   fontFamily: 'var(--font-clash)',
                   backgroundImage: 'linear-gradient(135deg, #ffb74d, #f78c1f)',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
                 }}>{s.value}</span>
                 <span className="text-sm" style={{ color: 'rgba(255,255,255,0.40)' }}>{s.label}</span>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -303,10 +343,19 @@ export default function Home() {
       {/* ── Feature Cards ────────────────────────────── */}
       <section className="max-w-[1152px] mx-auto px-6 py-20 pb-28">
         <div className="flex flex-col gap-3">
-          {features.map((f) => (
+          {displayedFeatures.map(({ feature: f, index: featureIndex }) => (
             <div
               key={f.title}
-              className="feature-card group relative flex flex-row items-center gap-8 rounded-2xl overflow-hidden"
+              tabIndex={0}
+              className={`feature-card group relative flex flex-row items-center gap-8 rounded-2xl overflow-hidden${
+                highlightedFeatureIndices.includes(featureIndex) ? ' feature-card-active' : ''
+              }${
+                highlightedFeatureIndices.length > 0 && !highlightedFeatureIndices.includes(featureIndex) ? ' feature-card-dimmed' : ''
+              }`}
+              onMouseEnter={() => setHoveredFeatureIndex(featureIndex)}
+              onMouseLeave={() => setHoveredFeatureIndex(null)}
+              onFocus={() => setHoveredFeatureIndex(featureIndex)}
+              onBlur={() => setHoveredFeatureIndex(null)}
               style={{
                 background: 'linear-gradient(135deg, #110d03 0%, #0c0902 60%, #0f0b03 100%)',
                 border: '1.5px solid rgba(255,183,77,0.42)',

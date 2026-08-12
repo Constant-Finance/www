@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ─── Feature Card ──────────────────────────────── */
 .feature-card {
-  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s, opacity 0.25s, filter 0.25s;
 }
 .feature-card:hover {
   border-color: rgba(255, 183, 77, 0.65) !important;
@@ -49,6 +49,21 @@ h1, h2, h3, h4, h5, h6 {
 .feature-card:hover .feature-deco {
   opacity: 0.80;
 }
+.feature-card-active {
+  border-color: rgba(255, 183, 77, 0.85) !important;
+  box-shadow: 0 0 36px rgba(255, 183, 77, 0.16), 0 4px 18px rgba(0,0,0,0.55) !important;
+  transform: translateY(-4px);
+}
+.feature-card-active .feature-card-glow {
+  opacity: 1;
+}
+.feature-card-active .feature-deco {
+  opacity: 0.9;
+}
+.feature-card-dimmed {
+  opacity: 0.3;
+  filter: saturate(0.45);
+}
 
 /* ─── CTA Button Glow ───────────────────────────── */
 .btn-brand {
@@ -62,10 +77,10 @@ h1, h2, h3, h4, h5, h6 {
 /* ─── Prose (legal / about pages) ──────────────── */
 .prose h1 {
   font-family: var(--font-clash);
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: rgba(255, 255, 255, 0.92);
+  color: rgba(255, 255, 255, 0.90);
 }
 .prose h2 {
   font-family: var(--font-clash);
@@ -85,28 +100,37 @@ h1, h2, h3, h4, h5, h6 {
 }
 .prose p {
   margin-bottom: 1rem;
-  color: rgba(235, 235, 245, 0.60);
-  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.625;
+}
+.prose > p:first-of-type {
+  margin-bottom: 3rem;
+  color: rgba(255, 255, 255, 0.40);
+  font-family: var(--font-clash);
+  font-size: 1.125rem;
 }
 .prose ul {
   list-style-type: disc;
   padding-left: 1.5rem;
   margin-bottom: 1rem;
-  color: rgba(235, 235, 245, 0.60);
+  color: rgba(255, 255, 255, 0.55);
 }
 .prose ol {
   list-style-type: decimal;
   padding-left: 1.5rem;
   margin-bottom: 1rem;
-  color: rgba(235, 235, 245, 0.60);
+  color: rgba(255, 255, 255, 0.55);
 }
 .prose li {
   margin-bottom: 0.4rem;
-  line-height: 1.75;
+  line-height: 1.625;
 }
 .prose a {
   color: #ffb74d;
   text-decoration: underline;
+}
+.prose a:hover {
+  color: #ffd08a;
 }
 .prose strong {
   font-weight: 600;
@@ -122,12 +146,12 @@ h1, h2, h3, h4, h5, h6 {
   background: #1c1408;
   font-weight: 600;
   padding: 0.5rem 0.75rem;
-  border: 1px solid rgba(255, 183, 77, 0.15);
+  border: 1px solid rgba(255, 183, 77, 0.25);
   text-align: left;
   color: rgba(255, 255, 255, 0.92);
 }
 .prose td {
   padding: 0.5rem 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: rgba(235, 235, 245, 0.60);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.55);
 }
