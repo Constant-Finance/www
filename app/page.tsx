@@ -3,6 +3,7 @@
 /* eslint-disable react/no-unknown-property */
 
 import { useState } from 'react'
+import Link from 'next/link'
 
 const features = [
   // 1. Position Isolation
@@ -123,7 +124,7 @@ const features = [
       </svg>
     ),
     title: 'LP NFT Collateral',
-    details: 'Use Uniswap LP NFTs as collateral to unlock idle liquidity. Amplify returns with up to 20× leverage on LP positions, with real-time health factor monitoring and multiple risk strategies to keep liquidation exposure in check.',
+    details: 'Use ConstFi LP NFTs or Uniswap V3 LP NFTs as collateral to unlock idle liquidity. Amplify returns with up to 20× leverage on LP positions, with real-time health factor monitoring and multiple risk strategies to keep liquidation exposure in check.',
     deco: (
       <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="72" cy="60" r="42" stroke="#ffb74d" strokeOpacity="0.3" strokeWidth="1" strokeDasharray="6 4">
@@ -249,27 +250,74 @@ const features = [
   },
 ]
 
-const stats = [
-  { label: 'Positions', value: 'Isolated', featureIndices: [0] },
-  { label: 'Rates', value: 'Fixed', featureIndices: [1] },
-  { label: 'Collateral', value: 'RWA & LP NFT', featureIndices: [2, 3] },
-  { label: 'Leverage', value: 'Up to 20×', featureIndices: [3] },
+const protocolStats = [
+  { label: 'Protocol Status', value: 'Pre-launch', note: 'Mainnet markets are not live yet' },
+  { label: 'Target Networks', value: '3', note: 'Base · BSC · XLayer' },
+  { label: 'Collateral Classes', value: '3', note: 'RWA · ERC-20 & stablecoins · LP NFTs' },
+  { label: 'Capital Model', value: 'P2P', note: 'Direct lender–borrower matching' },
+]
+
+const markets = [
+  {
+    title: 'RWA-Backed Lending',
+    description: 'Use tokenized real-world assets as isolated collateral for transparent, fixed-term on-chain financing.',
+    collateral: 'Tokenized RWA',
+    financing: 'Fixed-term liquidity',
+  },
+  {
+    title: 'Token-Backed Lending',
+    description: 'Use approved ERC-20 assets and supported stablecoins as isolated collateral for flexible on-chain borrowing.',
+    collateral: 'ERC-20 & stablecoins',
+    financing: 'P2P capital',
+  },
+  {
+    title: 'LP NFT Lending',
+    description: 'Unlock liquidity from ConstFi or Uniswap V3 LP NFT positions while preserving a clear, position-level risk boundary.',
+    collateral: 'ConstFi & Uniswap V3 LP NFTs',
+    financing: 'P2P capital',
+  },
+]
+
+const advantages = [
+  {
+    ...features[1],
+    title: 'Fixed Terms, Predictable Costs',
+    details: 'Know the borrowing rate and maturity before opening a position. Financing costs stay predictable for the full term.',
+  },
+  {
+    ...features[0],
+    title: 'Isolated Risk',
+    details: 'Each borrowing position runs in its own margin silo, containing collateral and liquidation exposure at the position level.',
+  },
+  {
+    ...features[3],
+    title: 'Capital-Efficient Collateral',
+    details: 'Use approved RWA, ERC-20 assets and stablecoins, or ConstFi and Uniswap V3 LP NFTs as productive collateral.',
+  },
+  {
+    ...features[4],
+    title: 'Flexible Position Lifecycle',
+    details: 'P2P matching, atomic refinancing, and position trading are designed to keep capital moving before and after origination.',
+  },
+]
+
+const riskControls = [
+  {
+    title: 'Position-level isolation',
+    details: 'Collateral, debt, and liquidation exposure are contained within each individual position.',
+  },
+  {
+    title: 'Transparent market terms',
+    details: 'Rates, maturity, collateral parameters, and liquidation rules are defined before a loan is opened.',
+  },
+  {
+    title: 'Pre-launch verification',
+    details: 'Deployment addresses, technical documentation, and audit status will be published before mainnet activation.',
+  },
 ]
 
 export default function Home() {
-  const [activeStatIndex, setActiveStatIndex] = useState<number | null>(null)
   const [hoveredFeatureIndex, setHoveredFeatureIndex] = useState<number | null>(null)
-  const activeStatFeatureIndices = activeStatIndex === null ? [] : stats[activeStatIndex].featureIndices
-  const highlightedFeatureIndices = hoveredFeatureIndex === null
-    ? activeStatFeatureIndices
-    : [hoveredFeatureIndex]
-  const displayedFeatures = features
-    .map((feature, index) => ({ feature, index }))
-    .sort((a, b) => {
-      const aIsActive = activeStatFeatureIndices.includes(a.index)
-      const bIsActive = activeStatFeatureIndices.includes(b.index)
-      return Number(bIsActive) - Number(aIsActive)
-    })
 
   return (
     <>
@@ -300,57 +348,115 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-lg max-w-xl leading-relaxed" style={{ color: 'rgba(255,255,255,0.50)' }}>
-            Fixed rates. LP NFT &amp; RWA collateral. Peer-to-peer matching.
+            Fixed rates. RWA, ERC-20 &amp; LP NFT collateral. Peer-to-peer matching.
             A composable lending protocol built for real on-chain capital markets.
           </p>
         </div>
       </section>
 
-      {/* ── Stats Strip ──────────────────────────────── */}
-      <div className="max-w-[1152px] mx-auto px-6">
-        <div className="py-10"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-          <div
-            className="grid grid-cols-2 md:grid-cols-4 gap-8"
-            style={{ paddingLeft: '36px' }}
-            onMouseLeave={() => setActiveStatIndex(null)}
-          >
-            {stats.map((s, statIndex) => (
-              <button
-                type="button"
-                key={s.label}
-                className="flex flex-col items-start gap-1 cursor-default transition-opacity duration-200"
-                style={{
-                  opacity: activeStatIndex === null || activeStatIndex === statIndex ? 1 : 0.38,
-                }}
-                onMouseEnter={() => setActiveStatIndex(statIndex)}
-                onClick={() => setActiveStatIndex(statIndex)}
-                onFocus={() => setActiveStatIndex(statIndex)}
-                onBlur={() => setActiveStatIndex(null)}
-              >
-                <span className="text-3xl font-semibold" style={{
-                  fontFamily: 'var(--font-clash)',
-                  backgroundImage: 'linear-gradient(135deg, #ffb74d, #f78c1f)',
-                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-                }}>{s.value}</span>
-                <span className="text-sm" style={{ color: 'rgba(255,255,255,0.40)' }}>{s.label}</span>
-              </button>
-            ))}
+      {/* ── Protocol Numbers ─────────────────────────── */}
+      <section className="max-w-[1152px] mx-auto px-6 pb-24">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+          <div>
+            <p className="text-xs font-medium tracking-[0.2em] uppercase mb-3" style={{ color: '#ffb74d' }}>
+              Protocol Numbers
+            </p>
+            <h2 className="text-3xl md:text-4xl font-semibold" style={{ color: 'rgba(255,255,255,0.92)' }}>
+              Built for the markets ahead
+            </h2>
           </div>
+          <p className="text-sm leading-relaxed max-w-md" style={{ color: 'rgba(255,255,255,0.42)' }}>
+            Constant Finance is currently pre-launch. These figures describe the initial protocol scope—not live deposits or usage.
+          </p>
         </div>
-      </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 rounded-2xl overflow-hidden"
+          style={{ border: '1px solid rgba(255,183,77,0.20)', background: 'linear-gradient(135deg, #110d03, #0c0902)' }}>
+          {protocolStats.map((stat, index) => (
+            <div key={stat.label} className="p-7 min-h-[152px]"
+              style={{ borderRight: index < protocolStats.length - 1 ? '1px solid rgba(255,183,77,0.14)' : undefined }}>
+              <p className="text-xs uppercase tracking-[0.14em] mb-4" style={{ color: 'rgba(255,255,255,0.34)' }}>{stat.label}</p>
+              <p className="text-3xl font-semibold mb-2" style={{ fontFamily: 'var(--font-clash)', color: '#ffb74d' }}>{stat.value}</p>
+              <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,220,160,0.46)' }}>{stat.note}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      {/* ── Feature Cards ────────────────────────────── */}
-      <section className="max-w-[1152px] mx-auto px-6 py-20 pb-28">
-        <div className="flex flex-col gap-3">
-          {displayedFeatures.map(({ feature: f, index: featureIndex }) => (
+      {/* ── Featured Markets ─────────────────────────── */}
+      <section className="max-w-[1152px] mx-auto px-6 pb-24">
+        <div className="mb-8">
+          <p className="text-xs font-medium tracking-[0.2em] uppercase mb-3" style={{ color: '#ffb74d' }}>
+            Featured Markets
+          </p>
+          <h2 className="text-3xl md:text-4xl font-semibold mb-3" style={{ color: 'rgba(255,255,255,0.92)' }}>
+            Initial market design
+          </h2>
+          <p className="text-sm leading-relaxed max-w-xl" style={{ color: 'rgba(255,255,255,0.42)' }}>
+            Three collateral classes, fixed-term financing, and direct capital matching across Base, BSC, and XLayer.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {markets.map((market, index) => (
+            <article key={market.title} className="relative rounded-2xl p-7 md:p-8 overflow-hidden"
+              style={{
+                background: 'linear-gradient(135deg, #110d03 0%, #0c0902 65%, #0f0b03 100%)',
+                border: '1.5px solid rgba(255,183,77,0.36)',
+                boxShadow: '0 2px 12px rgba(0,0,0,0.5)',
+              }}>
+              <div aria-hidden className="pointer-events-none absolute -top-16 -right-12 w-52 h-52 rounded-full"
+                style={{ background: 'rgba(255,183,77,0.07)', filter: 'blur(42px)' }} />
+              <div className="relative">
+                <div className="flex items-center justify-between gap-4 mb-8">
+                  <span className="text-xs uppercase tracking-[0.14em]" style={{ color: 'rgba(255,255,255,0.34)' }}>
+                    Launch market 0{index + 1}
+                  </span>
+                  <span className="px-2.5 py-1 rounded-full text-[11px] font-medium"
+                    style={{ color: '#ffb74d', border: '1px solid rgba(255,183,77,0.25)', background: 'rgba(255,183,77,0.06)' }}>
+                    Planned
+                  </span>
+                </div>
+                <h3 className="text-2xl font-semibold mb-3" style={{ color: 'rgba(255,255,255,0.92)' }}>{market.title}</h3>
+                <p className="text-sm leading-relaxed mb-8 min-h-[68px]" style={{ color: 'rgba(255,220,160,0.50)' }}>
+                  {market.description}
+                </p>
+                <div className="grid grid-cols-2 gap-3 pt-5" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                  <div>
+                    <p className="text-[11px] uppercase tracking-wider mb-1.5" style={{ color: 'rgba(255,255,255,0.28)' }}>Collateral</p>
+                    <p className="text-sm" style={{ color: 'rgba(255,255,255,0.72)' }}>{market.collateral}</p>
+                  </div>
+                  <div>
+                    <p className="text-[11px] uppercase tracking-wider mb-1.5" style={{ color: 'rgba(255,255,255,0.28)' }}>Financing</p>
+                    <p className="text-sm" style={{ color: 'rgba(255,255,255,0.72)' }}>{market.financing}</p>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Advantages ──────────────────────────────── */}
+      <section className="max-w-[1152px] mx-auto px-6 pb-24">
+        <div className="mb-8">
+          <p className="text-xs font-medium tracking-[0.2em] uppercase mb-3" style={{ color: '#ffb74d' }}>
+            Constant Advantage
+          </p>
+          <h2 className="text-3xl md:text-4xl font-semibold mb-3" style={{ color: 'rgba(255,255,255,0.92)' }}>
+            Lending infrastructure, reworked
+          </h2>
+          <p className="text-sm leading-relaxed max-w-xl" style={{ color: 'rgba(255,255,255,0.42)' }}>
+            Hover a capability to focus on how Constant makes fixed-term lending more useful for real on-chain capital.
+          </p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-4">
+          {advantages.map((f, featureIndex) => (
             <div
               key={f.title}
               tabIndex={0}
-              className={`feature-card group relative flex flex-row items-center gap-8 rounded-2xl overflow-hidden${
-                highlightedFeatureIndices.includes(featureIndex) ? ' feature-card-active' : ''
+              className={`feature-card group relative flex flex-col items-start rounded-2xl overflow-hidden${
+                hoveredFeatureIndex === featureIndex ? ' feature-card-active' : ''
               }${
-                highlightedFeatureIndices.length > 0 && !highlightedFeatureIndices.includes(featureIndex) ? ' feature-card-dimmed' : ''
+                hoveredFeatureIndex !== null && hoveredFeatureIndex !== featureIndex ? ' feature-card-dimmed' : ''
               }`}
               onMouseEnter={() => setHoveredFeatureIndex(featureIndex)}
               onMouseLeave={() => setHoveredFeatureIndex(null)}
@@ -360,30 +466,99 @@ export default function Home() {
                 background: 'linear-gradient(135deg, #110d03 0%, #0c0902 60%, #0f0b03 100%)',
                 border: '1.5px solid rgba(255,183,77,0.42)',
                 boxShadow: '0 0 0 0.5px rgba(255,183,77,0.08), 0 2px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,183,77,0.08)',
-                minHeight: '120px',
-                padding: '28px 36px',
+                minHeight: '290px',
+                padding: '30px 32px',
               }}
             >
               <div aria-hidden className="feature-card-glow pointer-events-none absolute -top-10 -right-10 w-48 h-48 rounded-full"
                 style={{ background: 'rgba(255,183,77,0.07)', filter: 'blur(40px)' }} />
-              <div className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center border"
+              <div className="relative shrink-0 w-12 h-12 rounded-xl flex items-center justify-center border mb-8"
                 style={{ background: '#1c1005', borderColor: 'rgba(255,183,77,0.35)', color: '#ffb74d' }}>
                 {f.icon}
               </div>
-              <div className="flex-1 min-w-0">
-                <h2 className="text-lg font-semibold mb-2 leading-snug"
+              <div className="relative flex-1 min-w-0 pr-24">
+                <h3 className="text-xl font-semibold mb-3 leading-snug"
                   style={{ fontFamily: 'var(--font-clash)', color: 'rgba(255,255,255,0.92)' }}>
                   {f.title}
-                </h2>
-                <p className="text-sm leading-relaxed max-w-2xl" style={{ color: 'rgba(255,220,160,0.52)' }}>
+                </h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,220,160,0.52)' }}>
                   {f.details}
                 </p>
               </div>
-              <div className="feature-deco shrink-0 w-[200px] h-[120px] hidden lg:block">
+              <div className="feature-deco absolute right-5 bottom-3 w-[150px] h-[90px] hidden sm:block">
                 {f.deco}
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── Security & Risk ─────────────────────────── */}
+      <section className="max-w-[1152px] mx-auto px-6 pb-24">
+        <div className="rounded-2xl overflow-hidden grid lg:grid-cols-[0.9fr_1.1fr]"
+          style={{ border: '1px solid rgba(255,183,77,0.24)', background: 'linear-gradient(135deg, #110d03, #0b0802)' }}>
+          <div className="p-8 md:p-10 lg:p-12" style={{ borderRight: '1px solid rgba(255,183,77,0.14)' }}>
+            <p className="text-xs font-medium tracking-[0.2em] uppercase mb-4" style={{ color: '#ffb74d' }}>
+              Security &amp; Risk
+            </p>
+            <h2 className="text-3xl md:text-4xl font-semibold mb-5" style={{ color: 'rgba(255,255,255,0.92)' }}>
+              Risk boundaries before scale
+            </h2>
+            <p className="text-sm leading-relaxed mb-7" style={{ color: 'rgba(255,255,255,0.44)' }}>
+              Security information should be verifiable, not implied. Constant Finance will publish launch-critical evidence before markets accept capital.
+            </p>
+            <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg text-xs"
+              style={{ color: '#ffb74d', border: '1px solid rgba(255,183,77,0.22)', background: 'rgba(255,183,77,0.05)' }}>
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: '#ffb74d' }} />
+              No public lending markets are live
+            </div>
+          </div>
+          <div className="p-8 md:p-10 lg:p-12 flex flex-col justify-center gap-7">
+            {riskControls.map((control, index) => (
+              <div key={control.title} className="flex gap-4">
+                <span className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold"
+                  style={{ color: '#ffb74d', border: '1px solid rgba(255,183,77,0.28)', background: 'rgba(255,183,77,0.06)' }}>
+                  0{index + 1}
+                </span>
+                <div>
+                  <h3 className="text-base font-semibold mb-1.5" style={{ color: 'rgba(255,255,255,0.86)' }}>{control.title}</h3>
+                  <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.40)' }}>{control.details}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Final CTA ───────────────────────────────── */}
+      <section className="max-w-[1152px] mx-auto px-6 pb-28">
+        <div className="relative rounded-2xl overflow-hidden px-8 py-14 md:px-14 md:py-16 text-center"
+          style={{
+            border: '1px solid rgba(255,183,77,0.38)',
+            background: 'radial-gradient(circle at 50% 0%, rgba(255,183,77,0.13), transparent 55%), linear-gradient(135deg, #140e03, #0b0802)',
+          }}>
+          <div aria-hidden className="pointer-events-none absolute -bottom-24 left-1/2 -translate-x-1/2 w-[520px] h-56 rounded-full"
+            style={{ background: 'rgba(247,140,31,0.08)', filter: 'blur(48px)' }} />
+          <div className="relative">
+            <p className="text-xs font-medium tracking-[0.2em] uppercase mb-4" style={{ color: '#ffb74d' }}>Build With Constant</p>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-5" style={{ color: 'rgba(255,255,255,0.94)' }}>
+              Bring the next lending market on-chain
+            </h2>
+            <p className="text-sm md:text-base leading-relaxed max-w-2xl mx-auto mb-8" style={{ color: 'rgba(255,255,255,0.46)' }}>
+              We are speaking with asset issuers, liquidity providers, integrators, and market makers ahead of launch.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link href="/contact" className="btn-brand inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold text-black"
+                style={{ fontFamily: 'var(--font-clash)', background: 'linear-gradient(135deg, #ffb74d, #f78c1f)' }}>
+                Get in Touch
+              </Link>
+              <a href="/litepaper.pdf" target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-medium transition-colors hover:bg-white/[0.06]"
+                style={{ fontFamily: 'var(--font-clash)', color: 'rgba(255,255,255,0.72)', border: '1px solid rgba(255,255,255,0.12)' }}>
+                Read the Litepaper
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </>
