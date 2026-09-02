@@ -12,8 +12,8 @@ export default defineConfig({
     nav: [
       { text: 'Points', link: 'https://points.constant.finance/' },
       { text: 'Litepaper', link: '/litepaper.pdf' },
-      { text: 'Quick Start', link: 'https://constfi.gitbook.io/docs' },
-      { text: 'Launch App', link: '#' },
+      { text: 'Docs', link: 'https://constant-finance.gitbook.io/docs' },
+      { text: 'Launch App', link: 'https://app.constant.finance' },
     ],
 
     sidebar: [
