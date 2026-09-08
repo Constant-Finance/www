@@ -1,0 +1,356 @@
+/* ---------------------------------------------------------------
+   Landing page — a faithful port of constant-finance-homepage-v4.html
+   (the source html.to.design imported into Figma). Values are taken
+   verbatim from that file; selectors are scoped under .lp so nothing
+   leaks into the VitePress doc pages.
+   --------------------------------------------------------------- */
+
+.lp {
+  --bg: #0A0908;
+  --card: #141009;
+  --card-2: #171209;
+  --border: #3A2C16;
+  --border-bright: rgba(232, 162, 60, 0.4);
+  --amber: #E8A23C;
+  --amber-deep: #C97F1E;
+  --amber-soft: rgba(232, 162, 60, 0.10);
+  --blue: #5D7A94;
+  --blue-deep: #46617A;
+  --ink: #ECE7DD;
+  --text: #A9A79D;
+  --text-dim: #7C7A70;
+  --green: #8BC34A;
+  --red: #E15F5F;
+  --radius: 14px;
+  --maxw: 1180px;
+  --display: 'Clash Display', sans-serif;
+
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.lp * { box-sizing: border-box; }
+
+.lp h1, .lp h2, .lp h3, .lp h4, .lp h5, .lp .display {
+  font-family: var(--display);
+  font-weight: 600;
+  margin: 0;
+}
+
+.lp .mono { font-family: 'JetBrains Mono', monospace; }
+.lp a { color: inherit; }
+.lp .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
+.lp :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+.lp ::selection { background: var(--amber); color: #0A0908; }
+
+/* ---------- Top announcement bar ---------- */
+.lp .annc {
+  background: var(--card-2); border-bottom: 1px solid var(--border);
+  text-align: center; padding: 9px 16px; font-size: 13.5px; color: var(--amber);
+  font-family: 'JetBrains Mono', monospace;
+}
+.lp .annc a { text-decoration: underline; color: var(--amber); }
+.lp .annc .x {
+  color: var(--text-dim); margin-left: 14px; cursor: pointer; text-decoration: none;
+  background: none; border: none; font: inherit; padding: 0;
+}
+
+/* ---------- Nav ---------- */
+.lp header {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(10, 9, 8, 0.88); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.lp nav.wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+.lp .logo { display: flex; align-items: center; text-decoration: none; }
+.lp .logo-lockup { width: 144px; height: 50px; display: block; }
+.lp .navlinks { display: flex; align-items: center; gap: 28px; font-family: var(--display); font-size: 14px; line-height: 20px; }
+.lp .navlinks a {
+  text-decoration: none; color: var(--text); transition: color .15s ease;
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 17px;
+}
+.lp .navlinks a:hover { color: var(--ink); }
+.lp .arr { width: 8.5px; height: 8.5px; flex: none; }
+.lp .navlinks a.points { color: var(--amber); }
+.lp .nav-right { display: flex; align-items: center; gap: 18px; }
+/* ---------- Buttons ---------- */
+.lp .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 16px 30px; border-radius: 12px; font-size: 25px; line-height: 35px; font-weight: 500;
+  text-decoration: none; border: none; cursor: pointer;
+  font-family: var(--display);
+  transition: background .15s ease, border-color .15s ease, transform .1s ease;
+}
+.lp .btn:active { transform: translateY(1px); }
+.lp .btn-amber-fill {
+  background: rgba(255, 183, 77, 0.8); color: #000000;
+  box-shadow: 0 0 15px rgba(255, 183, 77, 0.2);
+}
+.lp .btn-amber-fill:hover { background: rgb(255, 183, 77); }
+.lp .btn-amber-outline { border: 1px solid var(--amber); color: var(--amber); background: transparent; }
+.lp .btn-amber-outline:hover { background: var(--amber-soft); }
+.lp .btn-blue-fill {
+  background: rgba(93, 137, 174, 0.8); color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(93, 137, 174, 0.2);
+}
+.lp .btn-blue-fill:hover { background: rgb(93, 137, 174); color: #fff; }
+.lp .btn-blue-outline { border: 1px solid var(--blue); color: var(--blue); background: transparent; }
+.lp .btn-blue-outline:hover { background: rgba(93, 122, 148, 0.12); }
+.lp .btn-sm { padding: 9px 16px; border-radius: 10px; font-size: 13.5px; line-height: 21.6px; }
+.lp .btn-block {
+  width: 100%; padding: 11.5px 22px; border-radius: 10px;
+  font-size: 20px; line-height: 26px;
+}
+.lp .btn-amber-fill.btn-block { color: #241704; }
+
+/* ---------- Hero ---------- */
+.lp .hero { padding: 80px 0 236px; }
+.lp .status-pill {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--amber);
+  background: var(--amber-soft); border: 1px solid var(--border-bright);
+  padding: 7px 14px; border-radius: 20px; margin-bottom: 26px;
+}
+.lp .status-pill .dot {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--amber);
+  box-shadow: 0 0 0 3px rgba(232, 162, 60, 0.18);
+}
+.lp .hero h1 { font-size: 52px; line-height: 59.3px; font-weight: 600; color: var(--amber); }
+.lp .hero h2.sub {
+  font-family: var(--display); font-weight: 500; font-size: 34px; line-height: 42.5px;
+  color: var(--ink); margin-top: 14px;
+}
+.lp .hero .tagline {
+  margin-top: 22px; font-size: 25px; line-height: 30.4px; color: var(--blue);
+  font-family: var(--display); font-weight: 500;
+}
+.lp .hero-ctas { display: flex; gap: 16px; margin-top: 36px; flex-wrap: wrap; align-items: center; }
+/* keep the two hero CTAs the same size (Read the docs is 230 in Figma) */
+.lp .hero-ctas .btn { min-width: 230px; }
+.lp .hero-ctas .points-link {
+  font-family: var(--display); font-size: 18px; line-height: 21.6px; color: var(--text);
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: 8px;
+}
+.lp .hero-ctas .points-link:hover { color: var(--amber); }
+
+/* ---------- Section shell ---------- */
+.lp section { padding: 0; }
+.lp .panel {
+  background: var(--card); border: 1px solid var(--border-bright); border-radius: var(--radius);
+  padding: 40px 44px;
+}
+.lp .eyebrow {
+  font-family: var(--display); font-weight: 400; color: var(--amber);
+  font-size: 25px; line-height: 32px; margin-bottom: 18px;
+}
+/* Figma: eyebrows are not uniform — measured per section */
+.lp #risk .eyebrow { font-weight: 500; }
+.lp #sides .eyebrow,
+.lp #audience .eyebrow { color: #FFB74D; line-height: 25px; }
+
+.lp .panel h3.big {
+  font-size: 26px; line-height: 41.6px; font-weight: 500;
+  color: var(--ink); margin-bottom: 18px;
+}
+.lp #points h3.big { font-size: 20px; line-height: 30px; font-weight: 400; }
+.lp .panel p { color: var(--text); font-size: 16px; line-height: 25px; margin: 0 0 12px; }
+.lp .panel p:last-child { margin-bottom: 0; }
+
+/* ---------- Three-card row ---------- */
+.lp .three-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 33px; margin-bottom: 24px; }
+.lp .num-card {
+  background: #000000; border: 1px solid rgba(255, 183, 77, 0.6); border-radius: 16px;
+  padding: 30px; text-align: center;
+}
+.lp .num-circle {
+  width: 32px; height: 32px; border-radius: 16px; border: 1px solid var(--amber); color: var(--amber);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 30px;
+  font-family: var(--display); font-weight: 400; font-size: 16px; line-height: 25px;
+}
+.lp .num-card h4 { font-size: 20px; line-height: 28px; font-weight: 400; color: #FFFFFF; margin-bottom: 30px; }
+.lp .num-card p { font-size: 16px; line-height: 25px; color: rgba(255, 255, 255, 0.8); margin: 0; text-align: justify; }
+.lp .panel .synth { text-align: center; color: #FFFFFF; font-size: 16px; line-height: 25px; margin: 0 auto; }
+
+/* ---------- Two-column reusable grid ---------- */
+.lp .panel-tint {
+  background: rgba(255, 183, 77, 0.05);
+  border: 1px solid rgba(255, 183, 77, 0.25);
+  border-radius: var(--radius);
+  padding: 40px 44px;
+}
+.lp .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.lp .two-col.uneven { grid-template-columns: 1.35fr 1fr; align-items: stretch; }
+.lp .col-panel {
+  background: #000000; border: 1px solid var(--border); border-radius: var(--radius); padding: 30px;
+}
+.lp .col-panel.borrow { border-color: rgba(255, 183, 77, 0.6); }
+.lp .col-panel.supply { border-color: #5D89AE; }
+.lp .pill {
+  display: inline-block; font-family: var(--display); font-weight: 500;
+  font-size: 25px; line-height: 35px;
+  padding: 8px 20px; border-radius: 12px; margin-bottom: 26px;
+}
+.lp .pill.amber {
+  background: rgba(255, 183, 77, 0.8); color: #000000;
+  box-shadow: 0 0 15px rgba(255, 183, 77, 0.2);
+}
+.lp .pill.blue {
+  background: rgba(93, 137, 174, 0.8); color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 15px rgba(93, 137, 174, 0.2);
+}
+.lp .col-panel .item { margin-bottom: 16px; }
+.lp .col-panel .item:last-child { margin-bottom: 0; }
+.lp .col-panel .item h5 { font-size: 20px; line-height: 28px; font-weight: 400; color: #FFFFFF; margin-bottom: 8px; }
+.lp .col-panel .item p { font-size: 16px; line-height: 25px; color: rgba(255, 255, 255, 0.8); margin: 0; }
+
+/* ---------- 4-step ---------- */
+.lp .steps-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.lp .step-card {
+  background: #000000; border: 1px solid rgba(255, 183, 77, 0.6); border-radius: 16px;
+  padding: 24px 22px; text-align: center;
+}
+.lp .step-card h4 { font-size: 20px; line-height: 28px; font-weight: 400; color: #FFFFFF; margin-bottom: 10px; }
+.lp .step-card p { font-size: 16px; line-height: 25px; color: rgba(255, 255, 255, 0.8); margin: 0; }
+
+/* ---------- Personas ---------- */
+.lp .personas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40.5px; margin-top: 0; }
+.lp .persona-card {
+  background: #000000; border: 1px solid rgba(255, 183, 77, 0.6); border-radius: 16px;
+  padding: 30px; text-align: center;
+}
+.lp .persona-icon {
+  width: 52px; height: 52px; border-radius: 50%; border: 1px solid var(--amber);
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; color: var(--amber);
+}
+.lp .persona-card h4 { font-size: 16px; line-height: 28px; font-weight: 500; color: #FFFFFF; margin-bottom: 30px; }
+.lp .persona-card p { font-size: 16px; line-height: 25px; color: rgba(255, 255, 255, 0.8); margin: 0; text-align: justify; }
+
+/* ---------- Comparison table ---------- */
+.lp .cmp-intro { margin-bottom: 28px; }
+.lp .cmp-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; }
+.lp .cmp-table th, .lp .cmp-table td { padding: 15.5px 18px; text-align: left; border-bottom: 1px solid var(--border); }
+/* Figma column widths, measured off the header cells (sum = 1026) */
+.lp .cmp-table th:nth-child(1) { width: 361.13px; }
+.lp .cmp-table th:nth-child(2) { width: 229.77px; }
+.lp .cmp-table th:nth-child(3) { width: 278.64px; }
+.lp .cmp-table th:nth-child(4) { width: 156.47px; }
+.lp .cmp-table thead th {
+  font-family: var(--display); font-weight: 500; font-size: 12.5px; line-height: 20px;
+  color: var(--text-dim); border-bottom: 1px solid var(--border-bright);
+}
+.lp .cmp-table thead th.hl { color: var(--amber); }
+.lp .cmp-table tbody th { font-weight: 500; color: var(--ink); font-size: 14px; line-height: 22.4px; }
+.lp .cmp-table td { font-family: var(--display); font-size: 14px; line-height: 22.4px; color: var(--text); }
+.lp .cmp-table td.hl { background: var(--amber-soft); color: var(--amber); font-weight: 500; }
+.lp .cmp-table td.hl:first-child { border-left: 1px solid var(--border-bright); }
+.lp .cmp-table td.no { color: var(--text-dim); }
+.lp .cmp-table thead th.hl-col, .lp .cmp-table tbody th { background: transparent; }
+.lp .panel p.cmp-note { margin-top: 20px; font-size: 15.5px; line-height: 24.8px; color: var(--text); }
+
+/* ---------- Points growth card ---------- */
+.lp .points-panel {
+  background: linear-gradient(135deg, var(--card) 0%, var(--card-2) 100%);
+  border: 1px solid var(--border-bright); border-radius: var(--radius);
+  padding: 40px 44px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center;
+}
+.lp .points-stats { display: flex; gap: 34px; margin-top: 22px; flex-wrap: wrap; }
+.lp .points-stats div span { display: block; }
+.lp .points-stats .v { font-family: 'JetBrains Mono', monospace; font-size: 19px; color: var(--amber); }
+.lp .points-stats .l { font-size: 12px; color: var(--text-dim); margin-top: 3px; }
+.lp .points-side {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 26px; text-align: center;
+}
+.lp .points-side p { font-size: 16px; line-height: 20.8px; color: var(--text-dim); margin: 0 0 16px; }
+.lp .points-disclaimer { margin-top: 24px; font-size: 12px; color: var(--text-dim); }
+
+/* ---------- The gap ---------- */
+.lp .gap-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+.lp .gap-stat { border-top: 1px solid var(--border); padding-top: 16px; }
+.lp .gap-stat .v { font-size: 30px; line-height: 48px; color: var(--amber); display: block; }
+.lp .gap-stat .l { font-size: 13.5px; line-height: 21.6px; color: var(--text); margin-top: 8px; }
+.lp .panel p.gap-note { margin-top: 26px; font-size: 15.5px; line-height: 24.8px; color: var(--text); }
+
+/* ---------- Live not roadmap ---------- */
+.lp .live-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 8px; }
+.lp .live-item { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 27px 26px 48px; }
+.lp .live-tag {
+  display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px; color: var(--amber); background: var(--amber-soft);
+  padding: 4px 10px; border-radius: 20px; margin-bottom: 25px;
+}
+.lp .live-item h4 { font-size: 17px; line-height: 27.2px; font-weight: 600; color: var(--ink); margin-bottom: 7px; }
+.lp .live-item p { font-size: 16px; line-height: 25px; color: var(--text); margin: 0; }
+
+/* ---------- Risk rows ---------- */
+/* Figma: 1026x57, padding 15, gap 8, radius 14, black fill, FFB74D 60% stroke */
+.lp .risk-row {
+  display: flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(255, 183, 77, 0.6); border-radius: 14px;
+  padding: 15px; margin-bottom: 14px; background: #000000;
+}
+.lp .risk-row:last-of-type { margin-bottom: 0; }
+.lp .risk-row .label { width: 390px; flex: none; font-weight: 500; color: #FFFFFF; font-size: 16px; line-height: 25px; }
+.lp .risk-row .desc { color: rgba(255, 255, 255, 0.8); font-size: 16px; line-height: 25px; }
+.lp #risk > .panel > p { font-size: 16px; line-height: 25px; color: #FFFFFF; }
+.lp .doclink { color: var(--blue); text-decoration: underline; }
+
+/* ---------- Status rows ---------- */
+.lp .status-row {
+  display: flex; align-items: center; gap: 20px;
+  border: 1px solid rgba(255, 183, 77, 0.6); border-radius: 14px;
+  padding: 20px 15px 20px 20px; margin-bottom: 14px; background: #000000;
+}
+.lp .status-row:last-child { margin-bottom: 0; }
+.lp .status-dot { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+.lp .status-dot.live { background: var(--amber); }
+.lp .status-dot.progress { background: var(--green); }
+.lp .status-dot.mainnet { background: var(--blue); }
+.lp .status-dot.committed { background: var(--red); }
+.lp .status-row .label { width: 151px; flex: none; font-weight: 500; color: #FFFFFF; font-size: 16px; line-height: 25px; }
+.lp .status-row .desc { color: rgba(255, 255, 255, 0.8); font-size: 16px; line-height: 25px; }
+
+/* ---------- Investor callout ---------- */
+.lp .invest-card {
+  background: var(--card); border: 1px solid var(--border-bright); border-radius: var(--radius);
+  padding: 32px; display: flex; flex-direction: column;
+}
+.lp .invest-card .t-label {
+  font-family: var(--display); font-weight: 300; font-size: 25px; line-height: 36px;
+  color: var(--amber); margin-bottom: 12px;
+}
+.lp .invest-card h3 { font-size: 25px; line-height: 30.4px; font-weight: 500; color: var(--ink); margin-bottom: 12px; }
+.lp .invest-card p { font-size: 16px; line-height: 25px; color: var(--text); margin-bottom: 22px; flex-grow: 1; }
+
+/* ---------- Footer ---------- */
+.lp footer { border-top: 1px solid var(--border); padding: 56px 0 40px; margin-top: 114px; }
+.lp .foot-cols { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; text-align: center; }
+.lp .foot-col h4 {
+  font-family: var(--display); font-size: 15px; color: var(--amber);
+  margin-bottom: 16px; font-weight: 600;
+}
+.lp .foot-col a { display: block; font-size: 14px; color: var(--text); text-decoration: none; margin-bottom: 12px; }
+.lp .foot-col a:hover { color: var(--ink); }
+.lp .foot-col .soon { display: block; font-size: 14px; color: var(--text); margin-bottom: 12px; cursor: default; }
+.lp .foot-col a.contact-hl { color: var(--amber); font-weight: 600; }
+.lp .foot-bottom { margin-top: 44px; text-align: center; font-size: 13px; color: var(--text-dim); }
+
+.lp .stack > * + * { margin-top: 88px; }
+
+@media (max-width: 960px) {
+  .lp .three-grid, .lp .steps-4, .lp .personas, .lp .two-col,
+  .lp .two-col.uneven, .lp .points-panel, .lp .gap-stats, .lp .live-grid { grid-template-columns: 1fr; }
+  .lp .risk-row, .lp .status-row { flex-direction: column; gap: 8px; }
+  .lp .risk-row .label, .lp .status-row .label { width: auto; }
+  .lp .hero h1 { font-size: 36px; }
+  .lp .hero h2.sub { font-size: 24px; }
+  .lp .navlinks { display: none; }
+  .lp .foot-cols { gap: 40px; }
+  .lp .panel { padding: 28px 24px; }
+  .lp .cmp-table { font-size: 12px; }
+  .lp .cmp-table th, .lp .cmp-table td { padding: 10px 8px; }
+}

@@ -5,6 +5,15 @@ export default defineConfig({
   title: "Constant Finance",
   description: "Decentralized lending protocol with Fixed Rates, Flexible Access and Higher Yields",
   cleanUrls: true,
+
+  head: [
+    ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
+    ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
+    ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap' }],
+    ['link', { rel: 'preconnect', href: 'https://api.fontshare.com' }],
+    ['link', { rel: 'stylesheet', href: 'https://api.fontshare.com/v2/css?f[]=clash-display@200,300,400,500,600,700&display=swap' }]
+  ],
+
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/logo.svg',
