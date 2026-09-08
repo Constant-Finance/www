@@ -50,7 +50,7 @@ const L = {
         <div class="status-pill"><span class="dot"></span>Public Beta · Live on Sepolia · Audit in progress</div>
         <h1>Turn mismatched borrowing demand<br />into deals that close.</h1>
         <h2 class="sub">A fixed-rate lending protocol you can repay any time.</h2>
-        <p class="tagline">The moment you sign, you know the most this loan will ever cost you.</p>
+        <p class="tagline">Know your maxium loan cost before you sign.</p>
         <div class="hero-ctas">
           <a :href="L.app" class="btn btn-amber-fill">Launch App</a>
           <a :href="L.docs" class="btn btn-blue-fill">Read the docs</a>
@@ -324,7 +324,7 @@ const L = {
           <div class="invest-card">
             <div class="t-label">FOR INVESTORS &amp; PARTNERS</div>
             <h3>Talk to the team directly.</h3>
-            <p>We're building in the open — Public Beta now, audit in progress, mainnet next. If you're looking at a sponsorship, an integration, or a fundraising conversation, reach BD directly rather than through general support.</p>
+            <p>We're building in the open — Public Beta now, audit in progress, mainnet next. If you're looking at a sponsorship, an integration, or a fundraising conversation, reach our BD directly rather than through general support.</p>
             <a :href="L.bd" class="btn btn-amber-fill btn-block">hello@constant.finance</a>
           </div>
         </div>
