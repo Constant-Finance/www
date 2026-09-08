@@ -137,8 +137,8 @@ const L = {
             </div>
             <div class="live-item">
               <span class="live-tag">● Shipped</span>
-              <h4>Position Swap</h4>
-              <p>Want a fixed rate instead of a floating one — or the other way around? Position Swap trades one for the other through signed orders, matched and executed on-chain. Most of the next wave of fixed-rate designs still has this on a roadmap slide.</p>
+              <h4>Refinance</h4>
+              <p>Rates moved after you signed? Refinance closes the old loan and opens the new one in the same transaction — new suppliers cover the old position in full, your collateral moves straight across, and nothing settles unless all of it does. No unwinding, no repaying out of pocket. Most fixed-rate designs still leave you holding to maturity.</p>
             </div>
           </div>
         </div>
