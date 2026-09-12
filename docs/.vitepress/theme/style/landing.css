@@ -239,6 +239,7 @@
 
 /* ---------- Comparison table ---------- */
 .lp .cmp-intro { margin-bottom: 28px; }
+.lp .cmp-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .lp .cmp-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 14px; }
 .lp .cmp-table th, .lp .cmp-table td { padding: 15.5px 18px; text-align: left; border-bottom: 1px solid var(--border); }
 /* Figma column widths, measured off the header cells (sum = 1026) */
@@ -355,9 +356,37 @@
   .lp .risk-row .label, .lp .status-row .label { width: auto; }
   .lp .hero h1 { font-size: 36px; }
   .lp .hero h2.sub { font-size: 24px; }
-  .lp .navlinks { display: none; }
+  /* keep the links: logo + Launch App on row 1, links centred on row 2 */
+  .lp nav.wrap { flex-wrap: wrap; height: auto; padding-top: 12px; padding-bottom: 10px; row-gap: 2px; }
+  .lp .navlinks { order: 3; width: 100%; justify-content: center; gap: 8px; }
+  .lp .navlinks a { padding: 6px 12px; }
   .lp .foot-cols { gap: 40px; }
   .lp .panel { padding: 28px 24px; }
   .lp .cmp-table { font-size: 12px; }
   .lp .cmp-table th, .lp .cmp-table td { padding: 10px 8px; }
+
+  /* desktop-measured px values that must relax on small screens */
+  .lp .hero { padding-bottom: 64px; }
+  .lp .hero h1 { line-height: 1.14; }
+  .lp .hero h1 br { display: none; }
+  .lp .hero h2.sub { line-height: 1.25; }
+  .lp .hero-ctas .btn { min-width: 0; }
+  .lp .stack > * + * { margin-top: 64px; }
+  .lp footer { margin-top: 64px; }
+}
+
+@media (max-width: 640px) {
+  /* one event per line in the announcement bar */
+  .lp .annc { padding: 10px 40px 10px 16px; position: relative; }
+  .lp .annc .ev { display: block; margin: 4px 0 0; white-space: normal; }
+  .lp .annc .ev + .ev::before { content: none; }
+  .lp .annc .x { position: absolute; right: 14px; top: 10px; margin: 0; }
+}
+
+@media (max-width: 360px) {
+  /* 144 logo + 112 button + 64 padding + 18 gap no longer fits */
+  .lp .wrap { padding: 0 16px; }
+  .lp .logo-lockup { width: 121px; height: 42px; }
+  /* the e-mail button label can't break, so shrink it instead */
+  .lp .btn-block { font-size: 16px; line-height: 22px; padding: 10px 14px; }
 }

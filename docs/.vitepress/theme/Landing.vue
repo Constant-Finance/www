@@ -48,9 +48,9 @@ const L = {
 
       <section class="hero">
         <div class="status-pill"><span class="dot"></span>Public Beta · Live on Sepolia · Audit in progress</div>
-        <h1>Turn mismatched borrowing demand<br />into deals that close.</h1>
+        <h1>Turn mismatched borrowing demand <br />into deals that close.</h1>
         <h2 class="sub">A fixed-rate lending protocol you can repay any time.</h2>
-        <p class="tagline">Know your maxium loan cost before you sign.</p>
+        <p class="tagline">Know your maximum loan cost before you sign.</p>
         <div class="hero-ctas">
           <a :href="L.app" class="btn btn-amber-fill">Launch App</a>
           <a :href="L.docs" class="btn btn-blue-fill">Read the docs</a>
@@ -89,6 +89,7 @@ const L = {
             <h3 class="big">The industry already tried both extremes.</h3>
             <p>Pooled protocols like Aave and Compound solve the counterparty problem by keeping a shared pool — the cost is a rate that moves under you. A newer wave of fixed-rate protocols like Term, Maple and Blend solves the certainty problem — the cost is usually a lockup, a matching maturity, or a penalty to leave early. Constant doesn't pick a side.</p>
           </div>
+          <div class="cmp-table-wrap">
           <table class="cmp-table">
             <thead>
               <tr>
@@ -121,6 +122,7 @@ const L = {
               </tr>
             </tbody>
           </table>
+          </div>
           <p class="cmp-note">This is the same list as "Three things at once" below, seen from the other side — what it costs competitors to give up, we didn't have to.</p>
         </div>
       </section>
