@@ -10,6 +10,7 @@ const L = {
   docs: 'https://constant-finance.gitbook.io/docs',
   points: 'https://points.constant.finance',
   litepaper: '/litepaper.pdf',
+  faq: 'https://constant-finance.gitbook.io/docs/faq',
   discord: 'https://discord.gg/gCXeqHYCXC',
   x: 'https://x.com/constant_fi',
   github: 'https://github.com/ConstantFinance',
@@ -22,7 +23,6 @@ const L = {
 
     <div class="annc" v-if="anncOpen">
       📍 Meet Constant Finance at
-      <span class="ev">ETH Taipei <b>Sep 13–14</b></span>
       <span class="ev">Korea Blockchain Week <b>Sep 29–Oct 1</b></span>
       <span class="ev">TOKEN2049 Singapore <b>Oct 7–8</b></span>
       <button class="x" aria-label="Dismiss" @click="anncOpen = false">✕</button>
@@ -36,6 +36,7 @@ const L = {
         <div class="navlinks">
           <a :href="L.litepaper">Litepaper</a>
           <a :href="L.docs">Docs <svg class="arr" viewBox="0 0 8.5 8.5" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0.9 7.6 7.6 0.9" /><path d="M2.6 0.9h5v5" /></svg></a>
+          <a :href="L.faq">FAQ <svg class="arr" viewBox="0 0 8.5 8.5" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0.9 7.6 7.6 0.9" /><path d="M2.6 0.9h5v5" /></svg></a>
           <a :href="L.points" class="points">Points <svg class="arr" viewBox="0 0 8.5 8.5" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M0.9 7.6 7.6 0.9" /><path d="M2.6 0.9h5v5" /></svg></a>
         </div>
         <div class="nav-right">
@@ -346,6 +347,7 @@ const L = {
           <div class="foot-col">
             <h4>Resources</h4>
             <a :href="L.litepaper">Lite Paper</a>
+            <a :href="L.faq">FAQ</a>
             <a :href="L.github">GitHub</a>
           </div>
           <div class="foot-col">
