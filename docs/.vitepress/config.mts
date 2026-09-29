@@ -7,6 +7,23 @@ export default defineConfig({
   cleanUrls: true,
 
   head: [
+    // Link previews (Telegram, X, Discord, Slack...) — without these the URL
+    // unfurls as a bare link with no card.
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:site_name', content: 'Constant Finance' }],
+    ['meta', { property: 'og:title', content: 'Constant Finance | Close the gap. Cap the cost.' }],
+    ['meta', { property: 'og:description', content: 'A fixed-rate lending protocol you can repay any time. Know your maximum loan cost before you sign.' }],
+    ['meta', { property: 'og:url', content: 'https://constant.finance/' }],
+    ['meta', { property: 'og:image', content: 'https://constant.finance/og.png' }],
+    ['meta', { property: 'og:image:width', content: '1200' }],
+    ['meta', { property: 'og:image:height', content: '630' }],
+    ['meta', { property: 'og:image:alt', content: 'Constant Finance — turn mismatched borrowing demand into deals that close.' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:site', content: '@constant_fi' }],
+    ['meta', { name: 'twitter:title', content: 'Constant Finance | Close the gap. Cap the cost.' }],
+    ['meta', { name: 'twitter:description', content: 'A fixed-rate lending protocol you can repay any time. Know your maximum loan cost before you sign.' }],
+    ['meta', { name: 'twitter:image', content: 'https://constant.finance/og.png' }],
+    ['link', { rel: 'canonical', href: 'https://constant.finance/' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
     ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
     ['link', { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap' }],
