@@ -23,7 +23,6 @@ const L = {
 
     <div class="annc" v-if="anncOpen">
       📍 Meet Constant Finance at
-      <span class="ev">Korea Blockchain Week <b>Sep 29–Oct 1</b></span>
       <span class="ev">TOKEN2049 Singapore <b>Oct 7–8</b></span>
       <button class="x" aria-label="Dismiss" @click="anncOpen = false">✕</button>
     </div>
