@@ -3,7 +3,9 @@ import { ref } from 'vue'
 
 // Ported from constant-finance-homepage-v4.html (the source imported into
 // Figma), then reconciled against the Figma design, which is authoritative.
-const anncOpen = ref(true)
+// No event running — flip to true and swap the <span class="ev"> rows
+// in the banner below to bring it back.
+const anncOpen = ref(false)
 
 const L = {
   app: 'https://app.constant.finance',
@@ -23,7 +25,7 @@ const L = {
 
     <div class="annc" v-if="anncOpen">
       📍 Meet Constant Finance at
-      <span class="ev">TOKEN2049 Singapore <b>Oct 7–8</b></span>
+      <span class="ev">Event name <b>Date</b></span>
       <button class="x" aria-label="Dismiss" @click="anncOpen = false">✕</button>
     </div>
 
