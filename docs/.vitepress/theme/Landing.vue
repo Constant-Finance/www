@@ -184,7 +184,7 @@ const L = {
             </div>
             <div class="item">
               <h5>You pay only for the time you actually use.</h5>
-              <p>Simple interest, accrued per second, and unpaid interest doesn't compound. Borrow for a year, clear it in month three, and you pay three months of interest and take your principal back. That number is computable the day you sign.</p>
+              <p>Simple interest, accrued per second, and unpaid interest doesn't compound. Borrow for a year, clear it in month three, and you pay three months of interest and the principal back. That number is computable the day you sign.</p>
             </div>
             <div class="item">
               <h5>Every loan is isolated.</h5>
